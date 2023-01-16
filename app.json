@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MyList",
-    "slug": "MyList",
+    "slug": "my-list",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -29,6 +29,12 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c0876532-574f-42bd-b23b-57b0f3a19978"
+      }
+    },
+    "owner": "ricardomenotti"
   }
 }

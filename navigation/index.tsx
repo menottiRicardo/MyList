@@ -64,11 +64,14 @@ function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
-      <Stack.Screen
-        name="AddNew"
-        component={AddTodoNavigator}
-        options={{ headerShown: false }}
-      />
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          name="NewTodo"
+          component={SelectCategory}
+          // options={{ headerShown: false }}
+        />
+        <Stack.Screen name="todoDetails" component={FillDetails} />
+      </Stack.Group>
     </Stack.Navigator>
   );
 }
@@ -97,7 +100,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("AddNew")}
+              onPress={() => navigation.navigate("NewTodo")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}
@@ -124,22 +127,22 @@ function BottomTabNavigator() {
   );
 }
 
-const AddTodoStack = createNativeStackNavigator<AddNewParamList>();
-// Add new todo navigation
-function AddTodoNavigator() {
-  const colorScheme = useColorScheme();
+// const AddTodoStack = createNativeStackNavigator<AddNewParamList>();
+// // Add new todo navigation
+// function AddTodoNavigator() {
+//   const colorScheme = useColorScheme();
 
-  return (
-    <AddTodoStack.Navigator initialRouteName="newTodo">
-      <AddTodoStack.Screen
-        name="newTodo"
-        component={SelectCategory}
-        options={{ title: "Category" }}
-      />
-      <AddTodoStack.Screen name="todoDetails" component={FillDetails} />
-    </AddTodoStack.Navigator>
-  );
-}
+//   return (
+//     <AddTodoStack.Navigator initialRouteName="NewTodo">
+//       <AddTodoStack.Screen
+//         name="NewTodo"
+//         component={SelectCategory}
+//         // options={{ title: "Category" }}
+//       />
+//       <AddTodoStack.Screen name="todoDetails" component={FillDetails} />
+//     </AddTodoStack.Navigator>
+//   );
+// }
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/

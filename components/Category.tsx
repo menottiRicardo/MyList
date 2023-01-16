@@ -2,17 +2,36 @@ import React from "react";
 import { Text, View } from "./Themed";
 import { Platform, Pressable, StyleSheet } from "react-native";
 import useColorScheme from "../hooks/useColorScheme";
-const Category = ({ name }: { name: string }) => {
+import { CategoryType } from "../screens/AddNew/SelectCategory";
+const Category = ({
+  name,
+  handleSelectCategory,
+  id,
+  selected,
+}: {
+  name: string;
+  handleSelectCategory: (item: CategoryType) => void;
+  id: string;
+  selected: CategoryType | undefined;
+}) => {
   const colorScheme = useColorScheme();
   return (
-    <View
-      style={[
-        styles.container,
-        { borderColor: colorScheme === "dark" ? "white" : "black" },
-      ]}
+    <Pressable
+      onPress={() => {
+        handleSelectCategory({ name, key: id });
+      }}
     >
-      <Text style={styles.title}>{name}</Text>
-    </View>
+      <View
+        style={[
+          styles.container,
+          { borderColor: colorScheme === "dark" ? "white" : "black" },
+        ]}
+      >
+        {selected?.key === id && <View style={styles.selected} />}
+
+        <Text style={styles.title}>{name}</Text>
+      </View>
+    </Pressable>
   );
 };
 
@@ -23,14 +42,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderColor: "white",
-    flex: 1,
-    minWidth: 60,
-    minHeight: 60,
+    margin: 8,
+    paddingRight: 10,
+    paddingLeft: 10,
+    minHeight: 80,
     borderWidth: 1,
     borderRadius: 8,
+    position: "relative",
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  selected: {
+    backgroundColor: "white",
+    position: "absolute",
+    top: 0,
+    right: -1,
+    width: 20,
+    height: 20,
+    borderTopRightRadius: 6,
+    borderBottomLeftRadius: 3,
   },
 });
