@@ -1,6 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
-import { Pressable, RefreshControl, ScrollView, StyleSheet } from "react-native";
+import {
+  Pressable,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
@@ -51,7 +56,6 @@ export default function TabOneScreen({
     }, 2000);
   }, []);
 
-  
   return (
     <ScrollView
       refreshControl={
@@ -60,9 +64,15 @@ export default function TabOneScreen({
       contentContainerStyle={styles.container}
     >
       <View style={{ flex: 1, paddingTop: 10 }}>
-        <Text style={styles.title}>
-          You Have {storedData?.length} Remaining Tasks
-        </Text>
+        {storedData?.length === 0 ? (
+          <Text style={styles.title}>
+            Nothing on the list yet...
+          </Text>
+        ) : (
+          <Text style={styles.title}>
+            You Have {storedData?.length} Remaining Tasks
+          </Text>
+        )}
       </View>
 
       <View style={{ flex: 5, width: "90%" }}>
