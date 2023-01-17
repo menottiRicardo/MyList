@@ -1,28 +1,19 @@
-import { useNavigation } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { FlatList, Platform, Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import Category from "../../components/Category";
-
-import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
 
 export type CategoryType = { key: string; name: string };
 const categories: CategoryType[] = [
-  { key: "work", name: "work" },
-  { key: "work1", name: "work" },
-  { key: "wor2k", name: "work" },
-  { key: "work3", name: "work" },
-  { key: "work4", name: "work" },
-  { key: "work5", name: "work" },
-  { key: "work6", name: "work" },
-  { key: "work7", name: "work" },
+  { key: "copa", name: "Copa" },
+  { key: "control_risks", name: "Control Risks" },
+  { key: "palco", name: "Palco" },
+  { key: "restfully", name: "Restfully" },
 ];
 export default function SelectCategory({ navigation }: { navigation: any }) {
   const [selectedCategory, setSelectedCategory] = useState<
     CategoryType | undefined
   >(undefined);
- 
 
   const handleSelectCategory = (item: CategoryType) => {
     setSelectedCategory(item);
@@ -30,7 +21,10 @@ export default function SelectCategory({ navigation }: { navigation: any }) {
 
   const handleNext = () => {
     if (selectedCategory) {
-      navigation.navigate("todoDetails", { categoryId: selectedCategory.key });
+      navigation.navigate("todoDetails", {
+        categoryId: selectedCategory.key,
+        categoryName: selectedCategory.name,
+      });
     }
   };
 

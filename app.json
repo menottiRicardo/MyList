@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/c0876532-574f-42bd-b23b-57b0f3a19978"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -25,7 +26,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ricardomenotti.mylist"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
@@ -35,6 +37,9 @@
         "projectId": "c0876532-574f-42bd-b23b-57b0f3a19978"
       }
     },
-    "owner": "ricardomenotti"
+    "owner": "ricardomenotti",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }

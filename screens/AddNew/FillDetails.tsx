@@ -9,23 +9,46 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import useColorScheme from "../../hooks/useColorScheme";
-const FillDetails = ({ route }: { route: any }) => {
+const FillDetails = ({
+  route,
+  navigation,
+}: {
+  route: any;
+  navigation: any;
+}) => {
   const [details, setDetails] = useState<string | undefined>(undefined);
   const colorScheme = useColorScheme();
-  const { categoryId } = route.params;
+  const { categoryId, categoryName } = route.params;
   const handleSave = async () => {
     try {
       // get old value
       const rawOldValue = await AsyncStorage.getItem(categoryId);
-
+      const today = new Date();
       if (rawOldValue !== null) {
         // value previously stored
         const oldValue = JSON.parse(rawOldValue);
-        const newValue = JSON.stringify([...oldValue, { name: details }]);
+
+        const newValue = JSON.stringify([
+          ...oldValue,
+          {
+            name: details,
+            category: categoryName,
+            createdAt: today.toDateString(),
+          },
+        ]);
         await AsyncStorage.setItem(categoryId, newValue);
+        navigation.navigate("Root");
       } else {
-        const newValue = JSON.stringify([{ name: details }]);
+        // if dont have data
+        const newValue = JSON.stringify([
+          {
+            name: details,
+            category: categoryName,
+            createdAt: today.toDateString(),
+          },
+        ]);
         await AsyncStorage.setItem(categoryId, newValue);
+        navigation.navigate("Root");
       }
 
       alert("saved!");
